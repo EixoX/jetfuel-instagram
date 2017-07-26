@@ -21,6 +21,7 @@ public class TagsTests {
 		execution.params.tag = TestSettings.TAG;
 		execution.params.access_token = TestSettings.ACCESS_TOKEN;
 		execution.run();
+		TestSettings.println(execution.result);
 		Assert.assertTrue(execution.result != null);
 		Assert.assertTrue(execution.result.data.get(0).images != null);
 	}

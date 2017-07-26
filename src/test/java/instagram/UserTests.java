@@ -12,9 +12,6 @@ import com.eixox.usecases.UsecaseExecution;
 import com.eixox.usecases.instagram.user.Follows;
 import com.eixox.usecases.instagram.user.Info;
 import com.eixox.usecases.instagram.user.Info.Parameters;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import com.eixox.usecases.instagram.user.RecentMedia;
 import com.eixox.usecases.instagram.user.Search;
 
@@ -27,6 +24,7 @@ public class UserTests {
 		execution.params = new Parameters();
 		execution.params.access_token = TestSettings.ACCESS_TOKEN;
 		execution.run();
+		TestSettings.println(execution.result);
 		Assert.assertTrue(execution.result.data != null);
 		Assert.assertTrue(execution.result.data.id != null);
 	}
@@ -39,6 +37,7 @@ public class UserTests {
 		execution.params.access_token = TestSettings.ACCESS_TOKEN;
 		execution.params.id = TestSettings.USER_ID;
 		execution.run();
+		TestSettings.println(execution.result);
 		Assert.assertTrue(execution.result.data != null);
 		Assert.assertTrue(execution.result.data.id != null);
 
@@ -53,6 +52,7 @@ public class UserTests {
 		execution.params.access_token = TestSettings.ACCESS_TOKEN;
 		execution.params.user_id = "self";
 		execution.run();
+		TestSettings.println(execution.result);
 		Assert.assertTrue(execution.result.data != null);
 		Assert.assertTrue(execution.result.data.size() > 0);
 
@@ -67,6 +67,7 @@ public class UserTests {
 		execution.params.access_token = TestSettings.ACCESS_TOKEN;
 		execution.params.user_id = TestSettings.USER_ID;
 		execution.run();
+		TestSettings.println(execution.result);
 		Assert.assertTrue(execution.result.data != null);
 		Assert.assertTrue(execution.result.data.size() > 0);
 
@@ -81,7 +82,7 @@ public class UserTests {
 		execution.params.access_token = TestSettings.ACCESS_TOKEN;
 		execution.params.user_id = "self";
 		execution.run();
-		println(execution.result);
+		TestSettings.println(execution.result);
 		Assert.assertTrue(execution.result.data != null);
 		Assert.assertTrue(execution.result.data.size() > 0);
 
@@ -97,7 +98,7 @@ public class UserTests {
 		execution.params.access_token = TestSettings.ACCESS_TOKEN;
 		execution.params.query = "portela";
 		execution.run();
-		println(execution.result);
+		TestSettings.println(execution.result);
 		Assert.assertTrue(execution.result.data != null);
 		Assert.assertTrue(execution.result.data.size() > 0);
 	}
@@ -116,16 +117,5 @@ public class UserTests {
 		Assert.assertTrue(execution.result.data.size() > 0);
 	}
 
-	private void println(Object obj) {
-		if (obj == null)
-			System.out.println("null");
-		else
-			try {
-				System.out.println(writer.writeValueAsString(obj));
-			} catch (JsonProcessingException e) {
-				e.printStackTrace();
-			}
-	}
 
-	private final ObjectWriter writer = new ObjectMapper().writerWithDefaultPrettyPrinter();
 }
